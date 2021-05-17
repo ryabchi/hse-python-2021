@@ -14,7 +14,7 @@ try:
 except ValueError:
     print("Один или оба значения не являются числом")
     exit()
-except ZeroDivisionError
+except ZeroDivisionError:
     print("Деление на ноль")
     exit()
     
