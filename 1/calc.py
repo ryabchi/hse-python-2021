@@ -1,11 +1,11 @@
 operator = ['+', '-', '*', '/']
-print("Input operator")
+print('Input operator')
 x = input()
 
 if x not in operator:
-    print("Error. This operator does not exist")
+    print('Error. This operator does not exist')
     exit()
-print("Input two numbers")
+print('Input two numbers')
 a = float(input())
 b = float(input())
 
