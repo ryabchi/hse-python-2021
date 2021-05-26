@@ -77,7 +77,8 @@ def extract_python_string(raw_string: str) -> str:
     """
     result = ''
     # код писать здесь
-    return result
+    start = raw_string.lower().index('python')
+    return raw_string[start:start + 6]
 
 
 def main() -> None:
