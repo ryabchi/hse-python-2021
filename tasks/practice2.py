@@ -22,12 +22,9 @@ def extract_python_string(raw_string: str) -> str:
 
 
 def main() -> None:
-    #  generate_payment_message(
-    #     'Шубина Маша Глебовна', 'Вишнякова Амалия Станиславовна', 100.555
-    # )
-    # calculate_increased_cashback([(500.0, False), (100.0, True)])
-    # clean_user_login(' a.petrov')
-    # extract_python_string('Hello, PyThoN!')
+    calculate_increased_cashback([(500.0, False), (100.0, True)])
+    clean_user_login(' a.petrov')
+    extract_python_string('Hello, PyThoN!')
 
 
 if __name__ == '__main__':
