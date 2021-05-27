@@ -3,7 +3,7 @@ from typing import List, Tuple
 def generate_payment_message(from_user: str, to_user: str, amount: float) -> str:
 
     return 'Добрый день, ' + to_user.split(' ')[1] + '!\n' + from_user.split(' ')[1] + ' ' + from_user.split(' ')[0][0] + \
-        '. ' + ['перевела' if (from_user.split(' ')[2][-1] == 'а') else 'перевел'][0] + ' вам ' + [str(round(amount, 2)) if round(amount, 2) - int(amount) > 0.0000003 else str(int(amount))][0] + ' рублей.'
+        '. ' + ['перевела' if (from_user.split(' ')[2][-1] == 'а') else 'перевел'][0] + ' вам ' + "{0:.2f}".format(amount) + ' рублей.'
 
 
 def calculate_increased_cashback(operations: List[Tuple]) -> float:
@@ -22,7 +22,7 @@ def extract_python_string(raw_string: str) -> str:
 
 
 def main() -> None:
-    # print(generate_payment_message('Шубина Маша Глебовна', 'Вишнякова Амалия Станиславовна', 100.00))
+    print(generate_payment_message('Шубина Маша Глебовна', 'Вишнякова Амалия Станиславовна', 100.00))
     # calculate_increased_cashback([(500.0, False), (100.0, True)])
     # clean_user_login(' a.petrov')
     extract_python_string('Hello, PyThoN!')
