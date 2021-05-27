@@ -14,10 +14,7 @@ def generate_payment_message(from_user: str, to_user: str, amount: float) -> str
     Добрый день, Евгений!
     Александр И. перевел вам 100.56 рублей.
     """
-    result = ''
-    # подготовьте данные
-    # и используя функции форматирования(например, f-string) отформатируйте строку здесь
-    return result
+    return f'Добрый день, {to_user.split(" ")[1]}!\n{from_user.split(" ")[1]} {from_user.split(" ")[0][0]}. перевел вам {"{:.2f}".format(amount)} рублей.'
 
 
 def calculate_increased_cashback(operations: List[Tuple]) -> float:
@@ -39,9 +36,7 @@ def calculate_increased_cashback(operations: List[Tuple]) -> float:
         print(operation)  # в переменной operation будет записан кортеж
 
     """
-    result = 0
-    # код писать здесь
-    return result
+    return sum([op[0] * (0.05 if op[1] else 0.01) for op in operations])
 
 
 def clean_user_login(raw_login: str) -> str:
@@ -59,9 +54,7 @@ def clean_user_login(raw_login: str) -> str:
     На выходе:
     Строка с очищенным логином.
     """
-    login = None
-    # код писать здесь
-    return login
+    return raw_login.lower().replace(' ', '').replace('\'', '').replace('"','')
 
 
 def extract_python_string(raw_string: str) -> str:
@@ -75,9 +68,7 @@ def extract_python_string(raw_string: str) -> str:
     Извлекаем слово python в том виде, как оно прописано в исходной строке.
     Например, к строке выше вернем: "PythoN"
     """
-    result = ''
-    # код писать здесь
-    return result
+    return raw_string[raw_string.lower().find('python'): raw_string.lower().find('python') + len('python')]
 
 
 def main() -> None:
