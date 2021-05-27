@@ -14,7 +14,7 @@ def generate_payment_message(from_user: str, to_user: str, amount: float) -> str
     Добрый день, Евгений!
     Александр И. перевел вам 100.56 рублей.
     """
-    result = 'Добрый день, {}!\n{} перевел вам {:.2f} рублей.'.format(to_user.split()[1],
+    result = 'Добрый день, {}!\n{}. перевел вам {:.2f} рублей.'.format(to_user.split()[1],
                                                                   from_user.split()[1] + ' ' + from_user.split()[0][0],
                                                                   amount)
     # подготовьте данные
