@@ -92,5 +92,5 @@ def main() -> None:
     print(extract_python_string('Hello, Python!'))
 
 
-# if __name__ == '__main__':
+if __name__ == '__main__':
 main()
