@@ -101,7 +101,7 @@ def main() -> None:
         'Шубин Захар Глебович', 'Вишнякова Амалия Станиславовна', 100.555
     )
     calculate_increased_cashback([(500.0, False), (100.0, True)])
-    clean_user_login(' "a.p''Et"r''ov')
+    clean_user_login(' a.petrov')
     extract_python_string('Hello, Python!')
 
 
