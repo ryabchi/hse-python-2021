@@ -1,7 +1,8 @@
 from typing import List, Tuple
 
 
-def generate_payment_message(from_user: str, to_user: str, amount: float) -> str:
+def generate_payment_message(from_user: str, to_user: str,
+                             amount: float) -> str:
     """
     Генерирует сообщение о переводе денежных средств.
 
@@ -14,13 +15,16 @@ def generate_payment_message(from_user: str, to_user: str, amount: float) -> str
     Добрый день, Евгений!
     Александр И. перевел вам 100.56 рублей.
     """
-    result = ''
-    # подготовьте данные
-    # и используя функции форматирования(например, f-string) отформатируйте строку здесь
+    recipient_first_name = to_user.split()[1]
+    sender_split = from_user.split()
+    sender_short_name = sender_split[1] + " " + list(sender_split[0])[0] + "."
+    result = f'Добрый день, {recipient_first_name}!\n{sender_short_name} перевел вам {amount:.2f} рублей.'
+
     return result
 
 
-def calculate_increased_cashback(operations: List[Tuple]) -> float:
+def calculate_increased_cashback(
+        operations: List[Tuple[float, bool]]) -> float:
     """
     Рассчитывает размер повышенного кешбека для клиента банка.
     На все покупки - 1%
@@ -39,8 +43,10 @@ def calculate_increased_cashback(operations: List[Tuple]) -> float:
         print(operation)  # в переменной operation будет записан кортеж
 
     """
-    result = 0
-    # код писать здесь
+    result = sum(
+        map(lambda pair: pair[0] * 0.05
+            if pair[1] else pair[0] * 0.01, operations))
+
     return result
 
 
@@ -59,8 +65,8 @@ def clean_user_login(raw_login: str) -> str:
     На выходе:
     Строка с очищенным логином.
     """
-    login = None
-    # код писать здесь
+    login = raw_login.casefold().strip().replace("\"", "").replace("'", "")
+
     return login
 
 
@@ -76,14 +82,18 @@ def extract_python_string(raw_string: str) -> str:
     Например, к строке выше вернем: "PythoN"
     """
     result = ''
-    # код писать здесь
+    word_start_idx = raw_string.casefold().find("python")
+    word_len = len("python")
+
+    if word_start_idx != -1:
+        result = raw_string[word_start_idx:word_start_idx + word_len]
+
     return result
 
 
 def main() -> None:
-    generate_payment_message(
-        'Шубин Захар Глебович', 'Вишнякова Амалия Станиславовна', 100.555
-    )
+    generate_payment_message('Шубин Захар Глебович',
+                             'Вишнякова Амалия Станиславовна', 100.555)
     calculate_increased_cashback([(500.0, False), (100.0, True)])
     clean_user_login(' a.petrov')
     extract_python_string('Hello, Python!')
