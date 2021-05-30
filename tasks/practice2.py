@@ -15,8 +15,8 @@ def generate_payment_message(from_user: str, to_user: str, amount: float) -> str
     Александр И. перевел вам 100.56 рублей.
     """
     result = ''
-    # подготовьте данные
-    # и используя функции форматирования(например, f-string) отформатируйте строку здесь
+    result = f'Добрый день, {to_user.split()[1]}!\n'
+    result += f'{from_user.split()[1]} {from_user.split()[0][0]}. перевел вам {amount:.{2}f} рублей.'
     return result
 
 
@@ -40,7 +40,12 @@ def calculate_increased_cashback(operations: List[Tuple]) -> float:
 
     """
     result = 0
-    # код писать здесь
+    for operation in operations:
+    	if (operation[1]):
+    		result += operation[0]*0.05
+    	else:
+    		result += operation[0]*0.01
+
     return result
 
 
@@ -60,7 +65,10 @@ def clean_user_login(raw_login: str) -> str:
     Строка с очищенным логином.
     """
     login = None
-    # код писать здесь
+    login = raw_login.lower()
+    login = login.strip()
+    login = login.replace("'","")
+    login = login.replace('"',"")
     return login
 
 
@@ -75,17 +83,18 @@ def extract_python_string(raw_string: str) -> str:
     Извлекаем слово python в том виде, как оно прописано в исходной строке.
     Например, к строке выше вернем: "PythoN"
     """
-    result = ''
-    # код писать здесь
+    result = raw_string.lower()
+    k = result.find('python')
+    result = raw_string[k:k+6]
     return result
 
 
 def main() -> None:
     generate_payment_message(
-        'Шубин Захар Глебович', 'Вишнякова Амалия Станиславовна', 100.555
+        'Галкин Николай Петрович', 'Сидоров Григорий Мирославович', 100.5555
     )
     calculate_increased_cashback([(500.0, False), (100.0, True)])
-    clean_user_login(' a.petrov')
+    clean_user_login('    a.petrov    ')
     extract_python_string('Hello, Python!')
 
 
