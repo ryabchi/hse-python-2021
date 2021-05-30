@@ -15,6 +15,10 @@ def generate_payment_message(from_user: str, to_user: str, amount: float) -> str
     Александр И. перевел вам 100.56 рублей.
     """
     result = ''
+    to_user1 = to_user.split()[1]
+    from_user1 = from_user.split()[1] + ' ' + from_user[0]
+    amount1 = f'{amount:.2f}'
+    result = 'Добрый день, ' + to_user1 + '!' + '\n' + from_user1 + '. перевел вам ' + amount1 + ' рублей.'
     # подготовьте данные
     # и используя функции форматирования(например, f-string) отформатируйте строку здесь
     return result
@@ -40,6 +44,8 @@ def calculate_increased_cashback(operations: List[Tuple]) -> float:
 
     """
     result = 0
+    for operation in operations:
+        result += operation[0] * 0.05 if operation[1] else operation[0] * 0.01
     # код писать здесь
     return result
 
@@ -60,6 +66,11 @@ def clean_user_login(raw_login: str) -> str:
     Строка с очищенным логином.
     """
     login = None
+    raw_login = raw_login.lower()
+    raw_login = raw_login.replace(' ', '')
+    raw_login = raw_login.replace("\'", '')
+    raw_login = raw_login.replace('\"', '')
+    login = raw_login
     # код писать здесь
     return login
 
@@ -76,6 +87,14 @@ def extract_python_string(raw_string: str) -> str:
     Например, к строке выше вернем: "PythoN"
     """
     result = ''
+    for i in range(len(raw_string)):
+        if ((raw_string[i] == 'p') or (raw_string[i] == 'P')) and \
+                ((raw_string[i + 1] == 'y') or (raw_string[i + 1] == 'Y')) and \
+                ((raw_string[i + 2] == 't') or (raw_string[i + 2] == 'T')) and \
+                ((raw_string[i + 3] == 'h') or (raw_string[i + 3] == 'H')) and \
+                ((raw_string[i + 4] == 'o') or (raw_string[i + 4] == 'O')) and \
+                ((raw_string[i + 5] == 'n') or (raw_string[i + 5] == 'N')):
+            result = raw_string[i:i + 6]
     # код писать здесь
     return result
 
