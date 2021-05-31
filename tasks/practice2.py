@@ -66,9 +66,7 @@ def clean_user_login(raw_login: str) -> str:
     """
     login = ''
     # код писать здесь
-    for ch in raw_login:
-        if not (ch == ' ' or ch == '\'' or ch == '"'):
-            login += ch.lower()
+    login = raw_login.lower().strip().replace('\'', '').replace('"', '')
     return login
 
 
