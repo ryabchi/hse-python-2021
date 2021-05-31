@@ -21,19 +21,10 @@ def calculate_increased_cashback(operations: List[Tuple]) -> float:
 
 
 def clean_user_login(raw_login: str) -> str:
-    """
-    Приводит логин пользователя к виду, который используется в нашей системе.
-    Требования к логину:
-    - буквы только в нижнем регистре
-    - отсутствую лишние пробелы
-    - фильтруются 'опасные' символы: " ' (двойные и одинарные кавычки)
-    На вход принимает:
-    - raw_login - строка - логин в том виде, как его ввел пользователь
-    На выходе:
-    Строка с очищенным логином.
-    """
-    login = None
-    # код писать здесь
+    login = ''
+    for symb in raw_login:
+        if not(symb == ' ' or symb == '\'' or symb == '"'):
+            login += symb.lower()
     return login
 
 
