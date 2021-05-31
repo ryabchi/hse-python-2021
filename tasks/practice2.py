@@ -29,16 +29,9 @@ def clean_user_login(raw_login: str) -> str:
 
 
 def extract_python_string(raw_string: str) -> str:
-    """
-    Функция извлекает слово "python" из строки с сохранением оригинального написания.
-    На вход принимает:
-    - raw_string - строка - строка содержащая слово python буквами разного регистра - например "Hello, PythoN!"
-    На выходе:
-    Извлекаем слово python в том виде, как оно прописано в исходной строке.
-    Например, к строке выше вернем: "PythoN"
-    """
     result = ''
-    # код писать здесь
+    tmp = raw_string.lower().find('python')
+    result = raw_string[tmp: tmp + 6]
     return result
 
 
