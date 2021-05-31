@@ -17,7 +17,7 @@ def generate_payment_message(from_user: str, to_user: str, amount: float) -> str
     result = ''
     # подготовьте данные
     # и используя функции форматирования(например, f-string) отформатируйте строку здесь
-    result = print(f"Добрый день, {to_user.split()[1]}! {from_user.split()[1]} {list(from_user.split()[0])[0]}. перевел вам {amount} рублей.")
+    result = print(f"Добрый день, {to_user.split()[1]}! {from_user.split()[1]} {list(from_user.split()[0])[0]}. перевел вам {round(amount, 2)} рублей.")
     return result
 
 
