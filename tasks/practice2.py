@@ -14,7 +14,9 @@ def generate_payment_message(from_user: str, to_user: str, amount: float) -> str
     Добрый день, Евгений!
     Александр И. перевел вам 100.56 рублей.
     """
-    result = ''
+    fromu = from_user.split()
+    tou = to_user.split()
+    result = "Добрый день, " + tou[1] + "!\n" + fromu[1] + ' ' + fromu[0][0] + ". перевёл вам " + str(amount) + " рублей."
     # подготовьте данные
     # и используя функции форматирования(например, f-string) отформатируйте строку здесь
     return result
@@ -40,7 +42,7 @@ def calculate_increased_cashback(operations: List[Tuple]) -> float:
 
     """
     result = 0
-    # код писать здесь
+    for op in operations: result += op[0] * (0.01 + 0.04 * op[1])
     return result
 
 
@@ -60,7 +62,7 @@ def clean_user_login(raw_login: str) -> str:
     Строка с очищенным логином.
     """
     login = None
-    # код писать здесь
+    login = raw_login.lower().replace('"', '').replace("'", '').strip()
     return login
 
 
@@ -76,7 +78,7 @@ def extract_python_string(raw_string: str) -> str:
     Например, к строке выше вернем: "PythoN"
     """
     result = ''
-    # код писать здесь
+    result = raw_string[raw_string.lower().find("python") : raw_string.lower().find("python") + 6]
     return result
 
 
@@ -85,9 +87,8 @@ def main() -> None:
         'Шубин Захар Глебович', 'Вишнякова Амалия Станиславовна', 100.555
     )
     calculate_increased_cashback([(500.0, False), (100.0, True)])
-    clean_user_login(' a.petrov')
-    extract_python_string('Hello, Python!')
-
+    clean_user_login('     ""  \' a.pe""trov   ')
+    extract_python_string('Hello, PytHOn!')
 
 if __name__ == '__main__':
     main()
