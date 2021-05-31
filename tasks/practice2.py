@@ -16,7 +16,7 @@ def generate_payment_message(from_user: str, to_user: str, amount: float) -> str
     """
     fromu = from_user.split()
     tou = to_user.split()
-    result = "Добрый день, " + tou[1] + "!\n" + fromu[1] + ' ' + fromu[0][0] + ". перевёл вам " + str(amount) + " рублей."
+    result = "Добрый день, " + tou[1] + "!\n" + fromu[1] + ' ' + fromu[0][0] + ". перевел вам " + str(round(amount, 2)) + " рублей."
     # подготовьте данные
     # и используя функции форматирования(например, f-string) отформатируйте строку здесь
     return result
@@ -83,9 +83,9 @@ def extract_python_string(raw_string: str) -> str:
 
 
 def main() -> None:
-    generate_payment_message(
+    print(generate_payment_message(
         'Шубин Захар Глебович', 'Вишнякова Амалия Станиславовна', 100.555
-    )
+    ))
     calculate_increased_cashback([(500.0, False), (100.0, True)])
     clean_user_login('     ""  \' a.pe""trov   ')
     extract_python_string('Hello, PytHOn!')
