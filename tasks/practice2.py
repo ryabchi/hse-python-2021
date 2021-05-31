@@ -5,7 +5,7 @@ def generate_payment_message(from_user: str, to_user: str, amount: float) -> str
     result = ''
     spl_to = to_user.split()
     spl_from = from_user.split()
-    result = f"Доборый день, {spl_to[1]}!\n {spl_from[1]} {spl_from[0][0]}. перевел вам {amount:.2f} рублей."
+    result = f"Доборый день, {spl_to[1]}!\n{spl_from[1]} {spl_from[0][0]}. перевел вам {amount:.2f} рублей."
     return result
 
 
