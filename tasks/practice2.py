@@ -17,7 +17,7 @@ def generate_payment_message(from_user: str, to_user: str, amount: float) -> str
     result = ''
     # подготовьте данные
     # и используя функции форматирования(например, f-string) отформатируйте строку здесь
-    result = print(f"Добрый день, {to_user.split()[1]}! {from_user.split()[1]} {list(from_user.split()[0])[0]}. перевел вам {round(amount, 2)} рублей.")
+    result = f'Добрый день, {to_user.split()[1]}!\n{from_user.split()[1]} {list(from_user.split()[0])[0]}. перевел вам {round(amount, 2):.2f} рублей.'
     return result
 
 
@@ -43,7 +43,7 @@ def calculate_increased_cashback(operations: List[Tuple]) -> float:
     result = 0
     # код писать здесь
     for operation in operations:
-        print(operation)  # в переменной operation будет записан кортеж
+         # в переменной operation будет записан кортеж
         if operation[1] is True:
             result = result + operation[0]*0.05
         else:
