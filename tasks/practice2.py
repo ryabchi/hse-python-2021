@@ -1,4 +1,5 @@
 from typing import List, Tuple
+import re
 
 
 def generate_payment_message(from_user: str, to_user: str, amount: float) -> str:
@@ -17,6 +18,10 @@ def generate_payment_message(from_user: str, to_user: str, amount: float) -> str
     result = ''
     # подготовьте данные
     # и используя функции форматирования(например, f-string) отформатируйте строку здесь
+    first_name = to_user.split()
+    second_name = from_user.split()
+    amount = round(amount, 2)
+    result = "Добрый день, " + f"{first_name[1]}" + "!\n" + f"{second_name[1]} " + f"{from_user[0]}" + ". перевел вам " + f'{amount:.2f}' + " рублей."
     return result
 
 
@@ -41,6 +46,15 @@ def calculate_increased_cashback(operations: List[Tuple]) -> float:
     """
     result = 0
     # код писать здесь
+    cashback = 0
+    for operation in operations:
+        if not operation[1]:
+            cashback = operation[0]*0.01
+        else:
+            cashback = operation[0]*0.05
+        result += cashback
+
+    print(result)
     return result
 
 
@@ -60,6 +74,9 @@ def clean_user_login(raw_login: str) -> str:
     Строка с очищенным логином.
     """
     login = None
+    reg = re.compile('[^a-zA-Z.]')
+    login = reg.sub('', raw_login)
+    login = login.lower()
     # код писать здесь
     return login
 
@@ -75,8 +92,15 @@ def extract_python_string(raw_string: str) -> str:
     Извлекаем слово python в том виде, как оно прописано в исходной строке.
     Например, к строке выше вернем: "PythoN"
     """
-    result = ''
+    result = 0
     # код писать здесь
+    word = f"{raw_string}"
+    chars = " '\"!?&$%^*() "
+    word = word.strip(chars)
+    lower_word = raw_string.lower()
+    index = lower_word.find('python')
+    result = word[index:index+6]
+    print(result)
     return result
 
 
