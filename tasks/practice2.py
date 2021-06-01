@@ -38,11 +38,12 @@ def calculate_increased_cashback(operations: List[Tuple]) -> float:
         print(operation)  # в переменной operation будет записан кортеж
 
     """
-    for operation in operations:
-        if operation[1]:
-            result += operation[0] * 0.05
+    result = 0
+    for ope in operations:
+        if ope[1]:
+            result += ope[0] * 0.05
         else:
-            result += operation[0] * 0.01
+            result += ope[0] * 0.01
 
     return result
 
