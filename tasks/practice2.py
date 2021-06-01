@@ -14,9 +14,9 @@ def generate_payment_message(from_user: str, to_user: str, amount: float) -> str
     Добрый день, Евгений!
     Александр И. перевел вам 100.56 рублей.
     """
-    result = ''
-    # подготовьте данные
-    # и используя функции форматирования(например, f-string) отформатируйте строку здесь
+    fu = from_user.split(' ')
+    tu = to_user.split(' ')
+    result = f"Добрый день, {tu[1]}!\n{fu[1]} {fu[0][0]}. перевел вам {str('%.2f' % round(amount, 2))} рублей."
     return result
 
 
@@ -40,7 +40,11 @@ def calculate_increased_cashback(operations: List[Tuple]) -> float:
 
     """
     result = 0
-    # код писать здесь
+    for operation in operations:
+        if operation[1] == False:
+            result += operation[0]*0.01
+        else: result += operation[0]*0.05
+
     return result
 
 
@@ -60,7 +64,15 @@ def clean_user_login(raw_login: str) -> str:
     Строка с очищенным логином.
     """
     login = None
-    # код писать здесь
+    i=0
+    while raw_login[i]==' ':
+        i +=1
+    login=raw_login[i:]
+    i = len(login)-1
+    while login[i] == ' ':
+        i -= 1
+    login = login[:i+1]
+    login = login.lower().replace('\'', '').replace('"', '')
     return login
 
 
@@ -76,7 +88,10 @@ def extract_python_string(raw_string: str) -> str:
     Например, к строке выше вернем: "PythoN"
     """
     result = ''
-    # код писать здесь
+    new_str=raw_string.lower()
+    index=new_str.find('python')
+    for i in range(index, index+6):
+        result+=raw_string[i]
     return result
 
 
@@ -90,4 +105,8 @@ def main() -> None:
 
 
 if __name__ == '__main__':
+    #print(generate_payment_message('Egorova Kristina Olegovna', 'Sherchkov Anton Dmitrievich', 10000.00))
+    #print(calculate_increased_cashback([(500.0, False), (100.0, True)]))
+    #print(clean_user_login(  "KRisTin eo\'@gMail.com\"   "))
+    #print(extract_python_string("Hello, PythoN"))
     main()
