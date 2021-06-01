@@ -16,7 +16,11 @@ def generate_payment_message(from_user: str, to_user: str, amount: float) -> str
     """
     result = ''
     # подготовьте данные
+    to_user_format = to_user.split(' ')[1]
+    from_user_format = from_user.split(' ')[1] + ' ' + from_user[0] + '.'
+    amount_format = "%.2f" % round(amount, 2)  # превратил в строку
     # и используя функции форматирования(например, f-string) отформатируйте строку здесь
+    result = f'Добрый день, {to_user_format}!' + '\n' + f'{from_user_format} перевел вам {amount_format} рублей.'
     return result
 
 
@@ -41,6 +45,12 @@ def calculate_increased_cashback(operations: List[Tuple]) -> float:
     """
     result = 0
     # код писать здесь
+    for operation in operations:
+        if operation[1]:
+            result = result + operation[0] * 0.05
+        else:
+            result = result + operation[0] * 0.01
+
     return result
 
 
@@ -61,6 +71,7 @@ def clean_user_login(raw_login: str) -> str:
     """
     login = None
     # код писать здесь
+    login = raw_login.replace('\'', '').replace('\"', '').lower().strip()
     return login
 
 
@@ -76,7 +87,12 @@ def extract_python_string(raw_string: str) -> str:
     Например, к строке выше вернем: "PythoN"
     """
     result = ''
-    # код писать здесь
+    # Код писать здесь
+    for string in raw_string.split(' '):
+        string = string[0:7]  # Вырезаем полученное слово, чтобы исключить всякие ненужные знаки
+        lower_string = string  # Для сравнения со словом 'python'
+        if lower_string.lower() == 'python':
+            result = string
     return result
 
 
