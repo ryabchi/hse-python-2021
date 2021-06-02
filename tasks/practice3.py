@@ -1,6 +1,5 @@
 from typing import List, Dict, Any
 
-
 def filter_list(numbers: List[int]) -> List[int]:
     """
     Используя генератор списков (list comprehension) напишите код,
@@ -15,7 +14,7 @@ def filter_list(numbers: List[int]) -> List[int]:
     """
 
     # впишите ваш код здесь
-    return []
+    return [x for x in numbers if (x % 2) != 0]
 
 
 def get_popular_category(operations: List[Dict[str, Any]]) -> str:
@@ -31,7 +30,21 @@ def get_popular_category(operations: List[Dict[str, Any]]) -> str:
     """
 
     # впишите ваш код здесь
-    return ''
+    max_category = ''
+    max_amount = -1
+    bufdict = {}
+    for operation in operations:
+        if operation['category'] in bufdict.keys():
+            bufdict[operation['category']] += operation['amount']
+        else:
+            bufdict[operation['category']] = operation['amount']
+
+    print(bufdict)
+    for operation in bufdict.items():
+        if operation[1] > max_amount:
+            max_amount = operation[1]
+            max_category = operation[0]
+    return max_category
 
 
 def hide_personal_info(info: Dict[str, Any]) -> Dict[str, Any]:
@@ -49,12 +62,30 @@ def hide_personal_info(info: Dict[str, Any]) -> Dict[str, Any]:
     """
 
     # впишите ваш код здесь
+    newstr = ''
+    if 'passport_code' in info.keys():
+        for symbol in info['passport_code']:
+            if symbol.isdigit():
+                newstr += '*'
+            else:
+                newstr += symbol
+        info['passport_code'] = newstr
+        newstr = ''
+
+    if 'phone_number' in info.keys():
+        for symbol in info['phone_number']:
+            if symbol.isdigit():
+                newstr += '*'
+            else:
+                newstr += symbol
+        info['phone_number'] = newstr
     return info
 
 
 def main() -> None:
     pass
-
-
+    print(filter_list([1, 2, 3, 4, 5, 6, 7]))
+    d = {'passport_code': '12312432432', 'phone_number': '12355324757'}
+    print(hide_personal_info(d))
 if __name__ == '__main__':
     main()
