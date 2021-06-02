@@ -15,7 +15,7 @@ def filter_list(numbers: List[int]) -> List[int]:
     """
 
     # впишите ваш код здесь
-    return []
+    return [x for x in numbers if x % 2 == 1]
 
 
 def get_popular_category(operations: List[Dict[str, Any]]) -> str:
@@ -31,7 +31,13 @@ def get_popular_category(operations: List[Dict[str, Any]]) -> str:
     """
 
     # впишите ваш код здесь
-    return ''
+    m_cat = ''
+    m_amount = -1
+    for operation in operations:
+         if operation['amount'] > m_amount:
+             m_amount = operation['amount']
+             m_cat = operation['category']
+    return m_cat
 
 
 def hide_personal_info(info: Dict[str, Any]) -> Dict[str, Any]:
@@ -49,8 +55,24 @@ def hide_personal_info(info: Dict[str, Any]) -> Dict[str, Any]:
     """
 
     # впишите ваш код здесь
-    return info
+    temp = ""
+    if info.get("passport_code", 0):
+        for i in info["passport_code"]:
+            if i.isnumeric():
+                temp += '*'
+            else:
+                temp += i
+        info["passport_code"] = temp
 
+    temp = ""
+    if info.get("phone_number", 0):
+        for i in info["phone_number"]:
+            if i.isnumeric():
+                temp += '*'
+            else:
+                temp += i
+        info["phone_number"] = temp
+    return info
 
 def main() -> None:
     pass
@@ -58,3 +80,4 @@ def main() -> None:
 
 if __name__ == '__main__':
     main()
+
