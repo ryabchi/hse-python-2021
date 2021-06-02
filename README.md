@@ -60,8 +60,8 @@
 
 Если в выводе отсутствуют записи:
 ```
-> upstream  https://github.com/ryabchi/ci-test.git (fetch)
-> upstream  https://github.com/ryabchi/ci-test.git (push
+> upstream  https://github.com/ryabchi/hse-python-2021.git (fetch)
+> upstream  https://github.com/ryabchi/hse-python-2021.git (push
 ```
 
 Выполните команду ниже:
