@@ -66,7 +66,7 @@
 
 Выполните команду ниже:
 
-`git remote add upstream  https://github.com/ryabchi/ci-test.git`
+`git remote add upstream  https://github.com/ryabchi/hse-python-2021.git`
 
 Если присутствуют, то просто продолжайте работать по инструкции.
 
