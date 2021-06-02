@@ -73,11 +73,9 @@ def clean_user_login(raw_login: str) -> str:
     i = 0
     if login.islower() == False:
         login = login.lower()
-    if login[i] == ' ':
-        login = login.strip()
-        login = re.sub(r'\s+', ' ', login)
     login = login.replace('"', '')
     login = login.replace("'", "")
+    login = re.sub(r'\s+', '', login)
     return login
 
 
@@ -92,7 +90,6 @@ def extract_python_string(raw_string: str) -> str:
     """
     result = ''
     # код писать здесь
-    import re
     res = raw_string
     i = 0
     if res.islower() == False:
