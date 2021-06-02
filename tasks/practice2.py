@@ -21,7 +21,7 @@ def generate_payment_message(from_user: str, to_user: str, amount: float) -> str
     j = from_user.index(' ')
     j1 = from_user[j+1:len(from_user)].index(' ')
     result = (
-        f"Добрый день, {to_user[i+1:i+i1+1]}!\n" f"{from_user[0]}. {from_user[j+1:j+j1+1]} перевел вам {amount} рублей."
+        f"Добрый день, {to_user[i+1:i+i1+1]}!\n" f"{from_user[j+1:j+j1+1]} {from_user[0]}. перевел вам {amount} рублей."
         )
     print(result)
     return result
