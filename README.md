@@ -50,3 +50,47 @@
 
 Можно почитать [тут](https://docs.github.com/en/github/collaborating-with-pull-requests/working-with-forks/configuring-a-remote-for-a-fork).
 
+# Как подтянуть изменения (статья выше в кратком изложении)
+
+Для начала убедитесь прописан ли у вас upstream основного репозитория.
+
+Для этого введите:
+
+`git remote -v`
+
+Если в выводе отсутствуют записи:
+```
+> upstream  https://github.com/ryabchi/ci-test.git (fetch)
+> upstream  https://github.com/ryabchi/ci-test.git (push
+```
+
+Выполните команду ниже:
+
+`git remote add upstream  https://github.com/ryabchi/ci-test.git`
+
+Если присутствуют, то просто продолжайте работать по инструкции.
+
+Выполните команду:
+
+`git fetch upstream`
+
+Далее перейдите в свой main (`git checkout main`) и выполните команду:
+
+`git rebase upstream/main`
+
+После перейдите в свою ветку, например:
+
+`git checkout 19pmi-1/petrov`
+
+И находясь в ней выполните команду:
+
+`git rebase main`
+
+После чего запульте обновления в свою ветку на гихабе, выполнив команду:
+
+`git push --force`
+
+Обратите внимание, что первый push после ребейса обязательно должен выполняться в force режиме, 
+чтобы принудительно перезаписать содержимое удаленного репозитория. Обычный пуш у вас сделать не получится.
+
+После шагов выше - пишите свой код, чтобы он проходил тесты. Делайте коммит с описанием 'Practice 3' и пуште изменения.
