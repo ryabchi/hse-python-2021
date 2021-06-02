@@ -46,7 +46,7 @@ def calculate_increased_cashback(operations: List[Tuple]) -> float:
     # код писать здесь
     i = 0
     for i in range(len(operations)):
-        if operations[i][1] == "true":
+        if operations[i][1] == True:
             result = result + (operations[i][0] * 0.05)
         else:
             result = result + (operations[i][0] * 0.01)
