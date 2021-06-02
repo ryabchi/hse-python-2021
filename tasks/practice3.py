@@ -1,5 +1,6 @@
 from typing import List, Dict, Any
-
+import pandas as pd
+import re
 
 def filter_list(numbers: List[int]) -> List[int]:
     """
@@ -15,7 +16,7 @@ def filter_list(numbers: List[int]) -> List[int]:
     """
 
     # впишите ваш код здесь
-    return []
+    return [i for i in numbers if i % 2 != 0]
 
 
 def get_popular_category(operations: List[Dict[str, Any]]) -> str:
@@ -30,8 +31,9 @@ def get_popular_category(operations: List[Dict[str, Any]]) -> str:
     строка - название категории в которой клиент совершил наибольшее количество покупок.
     """
 
-    # впишите ваш код здесь
-    return ''
+    return pd.DataFrame(operations).groupby(['category']).sum() \
+    [pd.DataFrame(operations).groupby(['category']).sum()['amount'] == \
+    pd.DataFrame(operations).groupby(['category']).sum()['amount'].max()].index.item()
 
 
 def hide_personal_info(info: Dict[str, Any]) -> Dict[str, Any]:
@@ -49,11 +51,10 @@ def hide_personal_info(info: Dict[str, Any]) -> Dict[str, Any]:
     """
 
     # впишите ваш код здесь
-    return info
-
+    return {key: re.sub(r'[0-9]', "*", value) for key, value in info.items()}
 
 def main() -> None:
-    pass
+    print(hide_personal_info({'name': 'Jhon', 'lastname': 'Doe', 'passport_code': '2200 775511', 'phone_number': '+78005553535'}))
 
 
 if __name__ == '__main__':
