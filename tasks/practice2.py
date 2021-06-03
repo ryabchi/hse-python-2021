@@ -1,5 +1,5 @@
 from typing import List, Tuple
-
+import re
 
 def generate_payment_message(from_user: str, to_user: str, amount: float) -> str:
     """
@@ -14,9 +14,12 @@ def generate_payment_message(from_user: str, to_user: str, amount: float) -> str
     Добрый день, Евгений!
     Александр И. перевел вам 100.56 рублей.
     """
-    result = ''
-    # подготовьте данные
-    # и используя функции форматирования(например, f-string) отформатируйте строку здесь
+
+    fr_user = from_user.split()
+    t_user = to_user.split()
+
+    result = f'Добрый день, {t_user[1]}!\n{fr_user[1]} {fr_user[0][0]}. перевел вам {amount:.2f} рублей.'
+
     return result
 
 
@@ -40,7 +43,12 @@ def calculate_increased_cashback(operations: List[Tuple]) -> float:
 
     """
     result = 0
-    # код писать здесь
+    for i in operations:
+        if i[1] is True:
+            result = result + i[0] * 0.05
+        else:
+            result = result + i[0] * 0.01
+
     return result
 
 
@@ -59,8 +67,12 @@ def clean_user_login(raw_login: str) -> str:
     На выходе:
     Строка с очищенным логином.
     """
-    login = None
-    # код писать здесь
+    login = raw_login
+    login = login.lower()
+    login = login.replace('\"', '')
+    login = login.replace('\'', '')
+    login = login.strip()
+    login = re.sub(r'\s', '', login)
     return login
 
 
@@ -76,7 +88,9 @@ def extract_python_string(raw_string: str) -> str:
     Например, к строке выше вернем: "PythoN"
     """
     result = ''
-    # код писать здесь
+    str = raw_string.lower()
+    a = str.find('python')
+    result = raw_string[a:a+6]
     return result
 
 
