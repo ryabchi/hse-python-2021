@@ -1,4 +1,5 @@
 from typing import List, Dict, Any
+from re import sub
 
 
 def filter_list(numbers: List[int]) -> List[int]:
@@ -14,8 +15,9 @@ def filter_list(numbers: List[int]) -> List[int]:
     список только из нечетных чисел
     """
 
-    # впишите ваш код здесь
-    return []
+    numbers_even = [i for i in numbers if i % 2 != 0]
+
+    return numbers_even
 
 
 def get_popular_category(operations: List[Dict[str, Any]]) -> str:
@@ -30,8 +32,12 @@ def get_popular_category(operations: List[Dict[str, Any]]) -> str:
     строка - название категории в которой клиент совершил наибольшее количество покупок.
     """
 
-    # впишите ваш код здесь
-    return ''
+    maxim = [0, 'No purchases']
+    for operation in operations:
+        if operation['amount'] > maxim[0]:
+            maxim[0], maxim[1] = operation['amount'], operation['category']
+
+    return maxim[1]
 
 
 def hide_personal_info(info: Dict[str, Any]) -> Dict[str, Any]:
@@ -48,7 +54,11 @@ def hide_personal_info(info: Dict[str, Any]) -> Dict[str, Any]:
     - словарь в котором все персональные данные из описания функции - скрыты по алгоритму выше.
     """
 
-    # впишите ваш код здесь
+    if 'passport_code' in info:
+        info['passport_code'] = sub("[0-9]", '*', info['passport_code'])
+    if 'phone_number' in info:
+        info['phone_number'] = sub("[0-9]", '*', info['phone_number'])
+
     return info
 
 
