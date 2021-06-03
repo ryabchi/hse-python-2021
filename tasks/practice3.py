@@ -15,7 +15,7 @@ def filter_list(numbers: List[int]) -> List[int]:
     список только из нечетных чисел
     """
 
-    numbers_even = [i for i in numbers if i % 2 != 0]
+    numbers_even = [j for j in numbers if j % 2 != 0]
 
     return numbers_even
 
