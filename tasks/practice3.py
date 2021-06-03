@@ -2,36 +2,18 @@ from typing import List, Dict, Any
 
 
 def filter_list(numbers: List[int]) -> List[int]:
-    """
-    Используя генератор списков (list comprehension) напишите код,
-    который отфильтровывает все четные числа в списке.
-    И возвращает результат фильтрации.
-
-    На вход:
-    - numbers - список состоящий из чисел
-
-    На выходе:
-    список только из нечетных чисел
-    """
-
-    # впишите ваш код здесь
-    return []
+    new_list = []
+    for num in numbers:
+        if not (num % 2 == 0):
+            new_list.append(num)
+    return new_list
 
 
 def get_popular_category(operations: List[Dict[str, Any]]) -> str:
-    """
-    Функция анализирует список трат клиента по различным категориям товаров
-    и находит категорию, в которой человек совершил больше всего покупок.
-
-    На вход:
-    - operations - список словарей в формате [{'category': 'название категории', 'amount': 100}]
-
-    На выходе:
-    строка - название категории в которой клиент совершил наибольшее количество покупок.
-    """
-
-    # впишите ваш код здесь
-    return ''
+    for cat in operations:
+        if max_cat < cat['amount']:
+            max_cat = cat
+    return max_cat
 
 
 def hide_personal_info(info: Dict[str, Any]) -> Dict[str, Any]:
@@ -47,8 +29,13 @@ def hide_personal_info(info: Dict[str, Any]) -> Dict[str, Any]:
     На выходе:
     - словарь в котором все персональные данные из описания функции - скрыты по алгоритму выше.
     """
-
-    # впишите ваш код здесь
+    for client in info:
+        if client['passport_code'] in info:
+            for num in client['passport_code']:
+                num = '*'
+        if client['phone_number'] in info:
+            for num in client['phone_number']:
+                num = '*'
     return info
 
 
