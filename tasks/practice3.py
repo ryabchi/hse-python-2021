@@ -13,9 +13,9 @@ def filter_list(numbers: List[int]) -> List[int]:
     На выходе:
     список только из нечетных чисел
     """
-
     # впишите ваш код здесь
-    return []
+    numbers = [x for x in numbers if x % 2 == 1]
+    return numbers
 
 
 def get_popular_category(operations: List[Dict[str, Any]]) -> str:
@@ -29,9 +29,12 @@ def get_popular_category(operations: List[Dict[str, Any]]) -> str:
     На выходе:
     строка - название категории в которой клиент совершил наибольшее количество покупок.
     """
-
     # впишите ваш код здесь
-    return ''
+    set_operations = set(val['category'] for val in operations)
+    cleaned_operations = {val: 0 for val in set_operations}
+    for val in operations:
+        cleaned_operations[val['category']] += val['amount']
+    return max(cleaned_operations, key=lambda x: cleaned_operations[x])
 
 
 def hide_personal_info(info: Dict[str, Any]) -> Dict[str, Any]:
@@ -49,11 +52,18 @@ def hide_personal_info(info: Dict[str, Any]) -> Dict[str, Any]:
     """
 
     # впишите ваш код здесь
+    all_keys = info.keys()
+    symbols_to_encrypt = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
+    encrypting_pos = ['passport_code', 'phone_number']
+    for pos in encrypting_pos:
+        if pos in all_keys:
+            info[pos] = ''.join('*' if j in symbols_to_encrypt else j for j in info[pos])
+    print(info)
     return info
 
 
 def main() -> None:
-    pass
+    hide_personal_info( {'name': 'Jhon', 'lastname': 'Doe', 'passport_code': '2200 775511', 'phone_number': '+78005553535'})
 
 
 if __name__ == '__main__':
