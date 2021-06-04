@@ -1,5 +1,5 @@
 from typing import List, Dict, Any
-import pandas as pd
+# import pandas as pd
 import re
 
 def filter_list(numbers: List[int]) -> List[int]:
@@ -31,10 +31,16 @@ def get_popular_category(operations: List[Dict[str, Any]]) -> str:
     строка - название категории в которой клиент совершил наибольшее количество покупок.
     """
 
-    return pd.DataFrame(operations).groupby(['category']).sum() \
-    [pd.DataFrame(operations).groupby(['category']).sum()['amount'] == \
-    pd.DataFrame(operations).groupby(['category']).sum()['amount'].max()].index.item()
+    # return pd.DataFrame(operations).groupby(['category']).sum() \
+    # [pd.DataFrame(operations).groupby(['category']).sum()['amount'] == \
+    # pd.DataFrame(operations).groupby(['category']).sum()['amount'].max()].index.item()
 
+    cat = {i:0 for i in [j['category'] for j in operations]}
+
+    for i in operations:
+        cat[i['category']] += i['amount']
+
+    return max(cat, key=lambda x: cat[x])
 
 def hide_personal_info(info: Dict[str, Any]) -> Dict[str, Any]:
     """
@@ -54,8 +60,7 @@ def hide_personal_info(info: Dict[str, Any]) -> Dict[str, Any]:
     return {key: re.sub(r'[0-9]', "*", value) for key, value in info.items()}
 
 def main() -> None:
-    print(hide_personal_info({'name': 'Jhon', 'lastname': 'Doe', 'passport_code': '2200 775511', 'phone_number': '+78005553535'}))
-
+    print(get_popular_category([{'category': 'супермаркеты', 'amount': 3680}, {'category': 'рестораны', 'amount': 4649}]))
 
 if __name__ == '__main__':
     main()
