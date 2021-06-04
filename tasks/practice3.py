@@ -27,7 +27,13 @@ def get_popular_category(operations: List[Dict[str, Any]]) -> str:
     строка - название категории в которой клиент совершил наибольшее количество покупок.
     """
 
-    return ''
+    max_amount = 0
+    max_category = ''
+    for operation in operations:
+        if operation['amount'] > max_amount:
+            max_amount = operation['amount']
+            max_category = operation['category']
+    return max_category
 
 
 def hide_personal_info(info: Dict[str, Any]) -> Dict[str, Any]:
@@ -48,7 +54,7 @@ def hide_personal_info(info: Dict[str, Any]) -> Dict[str, Any]:
             if A[i] != ' ':
                 A = A.replace(str(i), '*')
         info['passport_code'] = A
-        
+
     if 'phone_number' in info:
         A = info['phone_number']
         for i in range(len(A)):
@@ -57,7 +63,6 @@ def hide_personal_info(info: Dict[str, Any]) -> Dict[str, Any]:
         info['phone_number'] = A
 
     return info
-
 
 def main() -> None:
     pass
