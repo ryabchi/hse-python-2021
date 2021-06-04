@@ -42,10 +42,20 @@ def hide_personal_info(info: Dict[str, Any]) -> Dict[str, Any]:
     - словарь в котором все персональные данные из описания функции - скрыты по алгоритму выше.
     """
 
-    if 'passport_code' in info and 'passport_code' != '':
-        info['passport_code'] = '*'
-    if 'phone_number' in info and 'phone_number' != '':
-        info['phone_number'] = '*'
+    if 'passport_code' in info:
+        A = info['passport_code']
+        for i in range(len(A)):
+            if A[i] != ' ':
+                A = A.replace(str(i), '*')
+        info['passport_code'] = A
+        
+    if 'phone_number' in info:
+        A = info['phone_number']
+        for i in range(len(A)):
+            if A[i] != ' ':
+                A = A.replace(str(i), '*')
+        info['phone_number'] = A
+
     return info
 
 
