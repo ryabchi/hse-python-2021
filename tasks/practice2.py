@@ -1,4 +1,4 @@
-from typing import List, Tuple
+from re import sub, search
 
 
 def generate_payment_message(from_user: str, to_user: str, amount: float) -> str:
@@ -14,13 +14,14 @@ def generate_payment_message(from_user: str, to_user: str, amount: float) -> str
     Добрый день, Евгений!
     Александр И. перевел вам 100.56 рублей.
     """
-    result = ''
-    # подготовьте данные
-    # и используя функции форматирования(например, f-string) отформатируйте строку здесь
+
+    name = f'{from_user.split()[1]} {from_user.split()[0][0]}.'
+    result = f'Добрый день, {to_user.split()[1]}!\n{name} перевел вам {amount:.2f} рублей.'
+
     return result
 
 
-def calculate_increased_cashback(operations: List[Tuple]) -> float:
+def calculate_increased_cashback(operations: list[tuple]) -> float:
     """
     Рассчитывает размер повышенного кешбека для клиента банка.
     На все покупки - 1%
@@ -40,7 +41,11 @@ def calculate_increased_cashback(operations: List[Tuple]) -> float:
 
     """
     result = 0
-    # код писать здесь
+    for operation in operations:
+        if operation[1]:
+            result += operation[0]*0.05
+        else:
+            result += operation[0] * 0.01
     return result
 
 
@@ -59,8 +64,11 @@ def clean_user_login(raw_login: str) -> str:
     На выходе:
     Строка с очищенным логином.
     """
-    login = None
-    # код писать здесь
+
+    login = sub('"', '', raw_login)
+    login = sub("'", '', login)
+    login = sub(" ", '', login).lower()
+
     return login
 
 
@@ -75,9 +83,10 @@ def extract_python_string(raw_string: str) -> str:
     Извлекаем слово python в том виде, как оно прописано в исходной строке.
     Например, к строке выше вернем: "PythoN"
     """
-    result = ''
-    # код писать здесь
-    return result
+    result = sub('[!?,.]', '', raw_string)
+    for word in result.split():
+        if word.lower() == 'python':
+            return word
 
 
 def main() -> None:
@@ -86,7 +95,7 @@ def main() -> None:
     )
     calculate_increased_cashback([(500.0, False), (100.0, True)])
     clean_user_login(' a.petrov')
-    extract_python_string('Hello, Python!')
+    extract_python_string('Hello, PyTHon!')
 
 
 if __name__ == '__main__':
