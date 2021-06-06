@@ -13,9 +13,7 @@ def filter_list(numbers: List[int]) -> List[int]:
     На выходе:
     список только из нечетных чисел
     """
-
-    # впишите ваш код здесь
-    return []
+    return [x for x in numbers if x % 2 == 1]
 
 
 def get_popular_category(operations: List[Dict[str, Any]]) -> str:
@@ -29,9 +27,11 @@ def get_popular_category(operations: List[Dict[str, Any]]) -> str:
     На выходе:
     строка - название категории в которой клиент совершил наибольшее количество покупок.
     """
-
-    # впишите ваш код здесь
-    return ''
+    unique_categories = {category['category'] for category in operations}
+    category_amount = {amount: 0 for amount in unique_categories}
+    for category in operations:
+        category_amount[category['category']] += category['amount']
+    return max(category_amount, key=lambda x: category_amount[x])
 
 
 def hide_personal_info(info: Dict[str, Any]) -> Dict[str, Any]:
@@ -48,7 +48,19 @@ def hide_personal_info(info: Dict[str, Any]) -> Dict[str, Any]:
     - словарь в котором все персональные данные из описания функции - скрыты по алгоритму выше.
     """
 
-    # впишите ваш код здесь
+    encrypt_symbols = [str(x) for x in range(10)]
+    encrypt_category = ['passport_code', 'phone_number']
+    keys = info.keys()
+    for key in keys:
+        for category in encrypt_category:
+            if key == category:
+                secure = ""
+                for symbol in info[category]:
+                    if symbol in encrypt_symbols:
+                        secure += '*'
+                    else:
+                        secure += symbol
+                info[key] = secure
     return info
 
 
