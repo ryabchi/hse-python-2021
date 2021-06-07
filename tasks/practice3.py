@@ -28,15 +28,27 @@ def get_popular_category(operations: List[Dict[str, Any]]) -> str:
 def hide_personal_info(info: Dict[str, Any]) -> Dict[str, Any]:
     new_str = ''
     if 'passport_code' in info:
-        tmp = len(str(info['passport_code']))
-        for i in range(tmp):
-            new_str += '*'
+        tmp_len = len(info['passport_code'])
+        tmp_str = info['passport_code']
+        for num in tmp_str:
+            if num == ' ':
+                new_str += ' '
+            elif num == '+':
+                new_str += '+'
+            else: new_str += '*'
         info['passport_code'] = new_str
+        new_str = ''
     if 'phone_number' in info:
-        tmp = len(str(info['phone_number']))
-        for i in range(tmp):
-            new_str += '*'
+        tmp_len = len(info['phone_number'])
+        tmp_str = info['phone_number']
+        for num in tmp_str:
+            if num == ' ':
+                new_str += ' '
+            elif num == '+':
+                new_str += '+'
+            else: new_str += '*'
         info['phone_number'] = new_str
+        new_str = ''
     return info
 
 
