@@ -33,9 +33,9 @@ def get_popular_category(operations: List[Dict[str, Any]]) -> str:
     max_amount = 0
     for operation in operations:
         if operation.get('category') not in comb_of_operations:
-            comb_of_operations[operation.get('category')] = operation.get('amount')
+            comb_of_operations[operation.get('category')] = 1
         else:
-            comb_of_operations[operation.get('category')] += operation.get('amount')
+            comb_of_operations[operation.get('category')] += 1
     for operation in comb_of_operations:
         if comb_of_operations.get(operation) > max_amount:
             max_amount = comb_of_operations.get(operation)
