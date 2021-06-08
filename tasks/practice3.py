@@ -15,7 +15,7 @@ def filter_list(numbers: List[int]) -> List[int]:
     """
 
     # впишите ваш код здесь
-    return []
+    return [i for i in numbers if i % 2 == 1]
 
 
 def get_popular_category(operations: List[Dict[str, Any]]) -> str:
@@ -29,9 +29,13 @@ def get_popular_category(operations: List[Dict[str, Any]]) -> str:
     На выходе:
     строка - название категории в которой клиент совершил наибольшее количество покупок.
     """
-
-    # впишите ваш код здесь
-    return ''
+    a = {}
+    for i in operations:
+        if i['category'] in a:
+            a[i['category']] += i['amount']
+        else:
+            a[i['category']] = i['amount']
+    return max(a, key=a.get)
 
 
 def hide_personal_info(info: Dict[str, Any]) -> Dict[str, Any]:
@@ -48,7 +52,13 @@ def hide_personal_info(info: Dict[str, Any]) -> Dict[str, Any]:
     - словарь в котором все персональные данные из описания функции - скрыты по алгоритму выше.
     """
 
-    # впишите ваш код здесь
+    numbers = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0']
+    a = ['passport_code', 'phone_number']
+    for j in a:
+        if j in info:
+            for elem in numbers:
+                if elem in info[j]:
+                    info[j] = info[j].replace(elem, '*')
     return info
 
 
