@@ -14,14 +14,15 @@ def get_popular_category(operations: List[Dict[str, Any]]) -> str:
     max_cat_amount = 0
     max_cat = ''
     for operation in operations:
-        for cat in cats:
-            if operation['category'] == cat['category']:
-                cats['amount'] += operation['amount']
-            else:
-                cats[operation['category']] = operation['amount']
+        if operation['category'] in cats:
+            cats[operation['category']] += operation['amount']
+        else:
+            cats[operation['category']] = operation['amount']
+    print(cats)
     for cat in cats:
-        if max_cat_amount < cat['amount']:
-            max_cat = cat['category']
+        if max_cat_amount < cats[cat]:
+            max_cat = cat
+            max_cat_amount = cats[cat]
     return max_cat
 
 
