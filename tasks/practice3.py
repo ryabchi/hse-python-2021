@@ -29,12 +29,17 @@ def get_popular_category(operations: List[Dict[str, Any]]) -> str:
     строка - название категории в которой клиент совершил наибольшее количество покупок.
     """
 
-    string = ""
+    comb_of_operations = {}
     max_amount = 0
     for operation in operations:
-        if operation.get('amount') > max_amount:
-            max_amount = operation.get('amount')
-            string = operation.get('category')
+        if operation.get('category') not in comb_of_operations:
+            comb_of_operations[operation.get('category')] = operation.get('amount')
+        else:
+            comb_of_operations[operation.get('category')] += operation.get('amount')
+    for operation in comb_of_operations:
+        if comb_of_operations.get(operation) > max_amount:
+            max_amount = comb_of_operations.get(operation)
+            string = operation
     return string
 
 
@@ -65,12 +70,19 @@ def hide_personal_info(info: Dict[str, Any]) -> Dict[str, Any]:
 
 
 def main() -> None:
-    # print(filter_list([1, 2, 3, 4, 5]))
-
-    # print(get_popular_category([{'category': 'супермаркеты', 'amount': 3680},
-    # {'category': 'рестораны', 'amount': 4649}, {'category': 'дом, ремонт', 'amount': 66646}]))
-
-    # print(hide_personal_info({'name': 'Jhon', 'passport_code': '2200 775511', 'phone_number': '+78005553535'}))
+    """"
+    print(filter_list([1, 2, 3, 4, 5]))
+    print(get_popular_category([{'category': 'супермаркеты', 'amount': 3680}, {'category': 'рестораны', 'amount': 4649},
+    {'category': 'супермаркеты', 'amount': 1388}, {'category': 'рестораны', 'amount': 1566},
+    {'category': 'дом, ремонт', 'amount': 646}, {'category': 'дом, ремонт', 'amount': 4524},
+    {'category': 'дом, ремонт', 'amount': 2751}, {'category': 'супермаркеты', 'amount': 1411},
+    {'category': 'рестораны', 'amount': 2140}, {'category': 'рестораны', 'amount': 3672},
+    {'category': 'рестораны', 'amount': 31}, {'category': 'дом, ремонт', 'amount': 1592},
+    {'category': 'рестораны', 'amount': 1514}, {'category': 'транспорт', 'amount': 457},
+    {'category': 'транспорт', 'amount': 577}, {'category': 'дом, ремонт', 'amount': 1799},
+    {'category': 'транспорт', 'amount': 3271}]))
+    print(hide_personal_info({'name': 'Jhon', 'passport_code': '2200 775511', 'phone_number': '+78005553535'}))
+    """
     pass
 
 
