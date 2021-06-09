@@ -25,7 +25,6 @@ def get_popular_category(operations: List[Dict[str, Any]]) -> str:
     """
 
     # впишите ваш код здесь
-    return ''
     list_categories = {category['category'] for category in operations}
     amount_category = {amount: 0 for amount in list_categories}
     for category in operations:
