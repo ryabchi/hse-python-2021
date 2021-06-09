@@ -11,7 +11,6 @@ def filter_list(numbers: List[int]) -> List[int]:
     """
 
     # впишите ваш код здесь
-    return []
     return [x for x in numbers if x % 2 != 0]
 
 
