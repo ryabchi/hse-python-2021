@@ -50,7 +50,7 @@ def hide_personal_info(info: Dict[str, Any]) -> Dict[str, Any]:
 
     # впишите ваш код здесь
     return {k : info[k] if k not in ['passport_code', 'phone_number'] else
-             info[k].translate(str.maketrans('+ 0123456789', '+ **********')) for k in info}
+             info[k].translate(str.maketrans('0123456789', '**********')) for k in info}
 
 
 def main() -> None:
