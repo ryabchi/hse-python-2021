@@ -15,7 +15,8 @@ def filter_list(numbers: List[int]) -> List[int]:
     """
 
     # впишите ваш код здесь
-    return []
+    odd_numbered_list = [x for x in numbers if x % 2 != 0]
+    return odd_numbered_list
 
 
 def get_popular_category(operations: List[Dict[str, Any]]) -> str:
@@ -31,7 +32,12 @@ def get_popular_category(operations: List[Dict[str, Any]]) -> str:
     """
 
     # впишите ваш код здесь
-    return ''
+    priority_client_category = operations[0]
+    for operation in operations:
+        if operation['amount'] >= priority_client_category['amount']:
+            priority_client_category = operation
+    return priority_client_category['category']
+
 
 
 def hide_personal_info(info: Dict[str, Any]) -> Dict[str, Any]:
@@ -49,6 +55,19 @@ def hide_personal_info(info: Dict[str, Any]) -> Dict[str, Any]:
     """
 
     # впишите ваш код здесь
+
+    if 'passport_code' in info:
+        protect_passport_code = str(info['passport_code'])
+        for number in str(info['passport_code']):
+             if number in {x for x in ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']}:
+                protect_passport_code = protect_passport_code.replace(number, '*')
+        info['passport_code'] = protect_passport_code
+    if 'phone_number' in info:
+        protect_phone_number = str(info['phone_number'])
+        for number in str(info['phone_number']):
+            if number in {x for x in ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']}:
+                protect_phone_number = protect_phone_number.replace(number, '*')
+        info['phone_number'] = protect_phone_number
     return info
 
 
