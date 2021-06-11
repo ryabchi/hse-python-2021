@@ -13,9 +13,8 @@ def filter_list(numbers: List[int]) -> List[int]:
     На выходе:
     список только из нечетных чисел
     """
-
-    # впишите ваш код здесь
-    return []
+    nums = [x for x in numbers if x % 2 == 1]
+    return nums
 
 
 def get_popular_category(operations: List[Dict[str, Any]]) -> str:
@@ -29,9 +28,14 @@ def get_popular_category(operations: List[Dict[str, Any]]) -> str:
     На выходе:
     строка - название категории в которой клиент совершил наибольшее количество покупок.
     """
+    popular_category = ''
+    max_amount = 0
+    for i in operations:
+        if i['amount'] > max_amount:
+            max_amount = i['amount']
+            popular_category = i['category']
 
-    # впишите ваш код здесь
-    return ''
+    return popular_category
 
 
 def hide_personal_info(info: Dict[str, Any]) -> Dict[str, Any]:
@@ -48,12 +52,30 @@ def hide_personal_info(info: Dict[str, Any]) -> Dict[str, Any]:
     - словарь в котором все персональные данные из описания функции - скрыты по алгоритму выше.
     """
 
-    # впишите ваш код здесь
+    if 'passport_code' in info:
+        new_code = ''
+        for i in info['passport_code']:
+            if i >='0' and i <='9':
+                new_code += '*'
+            else:
+                new_code += i
+        info['passport_code'] = new_code
+    if 'phone_number' in info:
+        new_code = ''
+        for i in info['phone_number']:
+            if i >= '0' and i <= '9':
+                new_code += '*'
+            else:
+                new_code += i
+        info['phone_number'] = new_code
+
     return info
 
 
 def main() -> None:
-    pass
+    print(filter_list([1, 2, 3, 4, 5]))
+    print(get_popular_category([{'category': 'food', 'amount': 10}, {'category': 'cloth', 'amount': 12}]))
+    print(hide_personal_info({'passport_code': '45673 562', 'phone_number': '+79567459137', 'fio': 'rgidggdid'}))
 
 
 if __name__ == '__main__':
