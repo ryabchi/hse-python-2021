@@ -23,7 +23,7 @@ def generate_payment_message(from_user: str, to_user: str, amount: float) -> str
     result = (
         f"Добрый день, {to_user[i+1:i+i1+1]}!\n" f"{from_user[j+1:j+j1+1]} {from_user[0]}. перевел вам {amount:.2f} рублей."
         )
-    print(result)
+    #print(result)
     return result
 
 
