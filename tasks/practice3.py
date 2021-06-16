@@ -55,9 +55,9 @@ def hide_personal_info(info: Dict[str, Any]) -> Dict[str, Any]:
     """
 
     if 'passport_code' in info:
-        info['passport_code'] = sub("[0-9]", '*', info['passport_code'])
+        info['passport_code'] = sub("[0-9]", '*', str(info['passport_code']))
     if 'phone_number' in info:
-        info['phone_number'] = sub("[0-9]", '*', info['phone_number'])
+        info['phone_number'] = sub("[0-9]", '*', str(info['phone_number']))
 
     return info
 
