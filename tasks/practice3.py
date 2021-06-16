@@ -31,7 +31,9 @@ def get_popular_category(operations: List[Dict[str, Any]]) -> str:
     """
 
     # впишите ваш код здесь
-    return ''
+    amounts = [x.get('amount') for x in operations]
+    max_index = amounts.index(max(amounts))
+    return operations[max_index].get('category')
 
 
 def hide_personal_info(info: Dict[str, Any]) -> Dict[str, Any]:
@@ -49,6 +51,13 @@ def hide_personal_info(info: Dict[str, Any]) -> Dict[str, Any]:
     """
 
     # впишите ваш код здесь
+    numbers = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0']
+    a = ['passport_code', 'phone_number']
+    for j in a:
+        if j in info:
+            for elem in numbers:
+                if elem in info[j]:
+                    info[j] = info[j].replace(elem, '*')
     return info
 
 
@@ -58,4 +67,3 @@ def main() -> None:
 
 if __name__ == '__main__':
     main()
-
