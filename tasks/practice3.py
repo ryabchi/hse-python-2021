@@ -15,7 +15,7 @@ def filter_list(numbers: List[int]) -> List[int]:
     """
 
     # впишите ваш код здесь
-    return [x for x in numbers if x % 2 == 0]
+    return [x for x in numbers if x % 2 == 1]
 
 
 def get_popular_category(operations: List[Dict[str, Any]]) -> str:
