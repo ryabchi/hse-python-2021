@@ -14,9 +14,9 @@ def generate_payment_message(from_user: str, to_user: str, amount: float) -> str
     Добрый день, Евгений!
     Александр И. перевел вам 100.56 рублей.
     """
-    result = ''
     # подготовьте данные
     # и используя функции форматирования(например, f-string) отформатируйте строку здесь
+    result = f"Добрый день, {to_user.split()[1]}!\n{from_user.split()[1]} {from_user.split()[0][0]}. перевел вам {amount:.2f} рублей."
     return result
 
 
@@ -41,6 +41,8 @@ def calculate_increased_cashback(operations: List[Tuple]) -> float:
     """
     result = 0
     # код писать здесь
+    for operation in operations:
+        result += operation[0]/100*(5 if operation[1] else 1)
     return result
 
 
@@ -59,8 +61,8 @@ def clean_user_login(raw_login: str) -> str:
     На выходе:
     Строка с очищенным логином.
     """
-    login = None
     # код писать здесь
+    login = raw_login.lower().strip().replace("\"", "").replace("\'", "")
     return login
 
 
@@ -77,6 +79,9 @@ def extract_python_string(raw_string: str) -> str:
     """
     result = ''
     # код писать здесь
+    if "python" in raw_string.lower():
+        ind = raw_string.lower().index("python")
+        result = raw_string[ind:ind+len("python")]
     return result
 
 
