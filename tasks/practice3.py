@@ -37,10 +37,10 @@ def get_popular_category(operations: List[Dict[str, Any]]) -> str:
         if d['category'] in count.keys():
             count[d['category']] += d['amount']
         else:
-            count[d['category']] += 0
-            if count[d['category']] > maxc:
-                retst = d['category']
-                maxc =  count[d['category']] 
+            count[d['category']] = 1
+        if count[d['category']] > maxc:
+            retst = d['category']
+            maxc =  count[d['category']] 
     return retst
 
 
@@ -59,19 +59,25 @@ def hide_personal_info(info: Dict[str, Any]) -> Dict[str, Any]:
     """
 
     if 'passport_code' in info.keys():
+        newstr =''
         for x in info['passport_code']:
             if x.isdigit():
-                x = '*'
+                newstr += '*'
+            else:
+                newstr += x
+        info['passport_code'] = newstr      
     if 'phone_number' in info.keys():
+        newstr =''
         for x in info['phone_number']:
             if x.isdigit():
-                x = '*'
+                newstr += '*'
+            else:
+                newstr += x
+        info['phone_number'] = newstr 
     return info
 
 
 def main() -> None:
     pass
-
-
 if __name__ == '__main__':
     main()
