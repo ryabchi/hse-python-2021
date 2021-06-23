@@ -15,7 +15,7 @@ def filter_list(numbers: List[int]) -> List[int]:
     """
 
     # впишите ваш код здесь
-    return []
+    return [x for x in numbers if x % 2 != 0]
 
 
 def get_popular_category(operations: List[Dict[str, Any]]) -> str:
@@ -31,7 +31,9 @@ def get_popular_category(operations: List[Dict[str, Any]]) -> str:
     """
 
     # впишите ваш код здесь
-    return ''
+    amounts = [x.get('amount') for x in operations]
+    max_index = amounts.index(max(amounts))
+    return operations[max_index].get('category')
 
 
 def hide_personal_info(info: Dict[str, Any]) -> Dict[str, Any]:
@@ -49,6 +51,12 @@ def hide_personal_info(info: Dict[str, Any]) -> Dict[str, Any]:
     """
 
     # впишите ваш код здесь
+    symbol = ['1','2','3','4','5','6','7','8','9','0']
+    key_list = info.keys()
+    categ_to_encrypt = ['passport_code', 'phone_number']
+    for i in categ_to_encrypt:
+        if i in key_list:
+            info[i] = ''.join('*' if j in symbol else j for j in info[i])
     return info
 
 
