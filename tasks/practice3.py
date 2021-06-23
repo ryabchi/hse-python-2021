@@ -15,7 +15,7 @@ def filter_list(numbers: List[int]) -> List[int]:
     """
 
     rlist =  [x for x in numbers if x % 2]
-    return []
+    return rlist
 
 
 def get_popular_category(operations: List[Dict[str, Any]]) -> str:
@@ -34,7 +34,10 @@ def get_popular_category(operations: List[Dict[str, Any]]) -> str:
     retst = ""
     maxc = 0
     for d in operations:
+        if d['category'] in count.keys():
             count[d['category']] += d['amount']
+        else:
+            count[d['category']] += 0
             if count[d['category']] > maxc:
                 retst = d['category']
                 maxc =  count[d['category']] 
@@ -55,11 +58,11 @@ def hide_personal_info(info: Dict[str, Any]) -> Dict[str, Any]:
     - словарь в котором все персональные данные из описания функции - скрыты по алгоритму выше.
     """
 
-    if 'passport_code' in info.key():
+    if 'passport_code' in info.keys():
         for x in info['passport_code']:
             if x.isdigit():
                 x = '*'
-    if 'phone_number' in info.key():
+    if 'phone_number' in info.keys():
         for x in info['phone_number']:
             if x.isdigit():
                 x = '*'
