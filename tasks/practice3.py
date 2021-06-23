@@ -37,7 +37,7 @@ def get_popular_category(operations: List[Dict[str, Any]]) -> str:
         if d['category'] in count.keys():
             count[d['category']] += d['amount']
         else:
-            count[d['category']] = 1
+            count[d['category']] = d['amount']
         if count[d['category']] > maxc:
             retst = d['category']
             maxc =  count[d['category']] 
@@ -79,5 +79,25 @@ def hide_personal_info(info: Dict[str, Any]) -> Dict[str, Any]:
 
 def main() -> None:
     pass
+operations = [{'amount': 3680, 'category': 'супермаркеты'},
+ {'amount': 4649, 'category': 'рестораны'},
+ {'amount': 1388, 'category': 'супермаркеты'},
+ {'amount': 1566, 'category': 'рестораны'},
+ {'amount': 646, 'category': 'дом, ремонт'},
+ {'amount': 4524, 'category': 'дом, ремонт'},
+ {'amount': 2751, 'category': 'дом, ремонт'},
+ {'amount': 1411, 'category': 'супермаркеты'},
+ {'amount': 2140, 'category': 'рестораны'},
+ {'amount': 3672, 'category': 'рестораны'},
+ {'amount': 31, 'category': 'рестораны'},
+ {'amount': 1592, 'category': 'дом, ремонт'},
+ {'amount': 1514, 'category': 'рестораны'},
+ {'amount': 457, 'category': 'транспорт'},
+ {'amount': 577, 'category': 'транспорт'},
+ {'amount': 1799, 'category': 'дом, ремонт'},
+ {'amount': 3271, 'category': 'транспорт'}]
+print(get_popular_category(operations))
+
+
 if __name__ == '__main__':
     main()
