@@ -1,4 +1,4 @@
-from typing import List, Dict, Any
+from typing import List, Dict, Any, Set
 
 
 def filter_list(numbers: List[int]) -> List[int]:
@@ -14,8 +14,7 @@ def filter_list(numbers: List[int]) -> List[int]:
     список только из нечетных чисел
     """
 
-    # впишите ваш код здесь
-    return []
+    return [num for num in numbers if num % 2 == 1]
 
 
 def get_popular_category(operations: List[Dict[str, Any]]) -> str:
@@ -30,8 +29,21 @@ def get_popular_category(operations: List[Dict[str, Any]]) -> str:
     строка - название категории в которой клиент совершил наибольшее количество покупок.
     """
 
-    # впишите ваш код здесь
-    return ''
+    categories: Set = set()
+    sum = {}               # Будет иметь структуру {'название категории': 100}, причём без повторений категорий
+    for operation in operations:
+        if operation['category'] in categories:
+            sum[operation['category']] += operation['amount']
+        else:
+            sum[operation['category']] = operation['amount']
+            categories.add(operation['category'])
+    max_amount = 0
+    max_category = ''
+    for key in sum.keys():
+        if sum[key] > max_amount:
+            max_amount = sum[key]
+            max_category = key
+    return max_category
 
 
 def hide_personal_info(info: Dict[str, Any]) -> Dict[str, Any]:
@@ -48,12 +60,35 @@ def hide_personal_info(info: Dict[str, Any]) -> Dict[str, Any]:
     - словарь в котором все персональные данные из описания функции - скрыты по алгоритму выше.
     """
 
+    try:
+        temp = str(info['passport_code'])
+        code_passport = ['*' if symbol != ' ' else symbol for symbol in temp]
+        info['passport_code'] = ''.join(code_passport)
+    except KeyError:
+        pass
+    try:
+        temp = str(info['phone_number'])
+        code_num = ['*' if symbol != '+' else symbol for symbol in temp]
+        info['phone_number'] = ''.join(code_num)
+    except KeyError:
+        pass
     # впишите ваш код здесь
     return info
 
 
 def main() -> None:
-    pass
+    OPERATIONS = [
+        {'category': 'супермаркеты', 'amount': 3680}, {'category': 'рестораны', 'amount': 4649},
+        {'category': 'супермаркеты', 'amount': 1388}, {'category': 'рестораны', 'amount': 1566},
+        {'category': 'дом, ремонт', 'amount': 646}, {'category': 'дом, ремонт', 'amount': 4524},
+        {'category': 'дом, ремонт', 'amount': 2751}, {'category': 'супермаркеты', 'amount': 1411},
+        {'category': 'рестораны', 'amount': 2140}, {'category': 'рестораны', 'amount': 3672},
+        {'category': 'рестораны', 'amount': 31}, {'category': 'дом, ремонт', 'amount': 1592},
+        {'category': 'рестораны', 'amount': 1514}, {'category': 'транспорт', 'amount': 457},
+        {'category': 'транспорт', 'amount': 577}, {'category': 'дом, ремонт', 'amount': 1799},
+        {'category': 'транспорт', 'amount': 3271}
+    ]
+    get_popular_category(OPERATIONS)
 
 
 if __name__ == '__main__':
